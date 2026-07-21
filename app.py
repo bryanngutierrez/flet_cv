@@ -102,13 +102,12 @@ def main(page: ft.Page):
     # --- PESTAÑA: HABILIDADES ---
     def show_habilidades(e=None):
         def skill_bar(name, level):
-            # Asignamos la propiedad col al Container primario del componente
             return ft.Container(
                 content=ft.Column([
                     ft.Row([ft.Text(name, weight=ft.FontWeight.BOLD, size=13), ft.Text(f"{int(level*100)}%")], alignment=ft.MainAxisAlignment.SPACE_BETWEEN),
                     ft.ProgressBar(value=level, color=COLOR_PRIMARIO, bgcolor=ft.Colors.GREY_800, height=6)
                 ]),
-                col={"sm": 6}  # <--- CORREGIDO: Manejo nativo de columnas responsivas
+                col={"sm": 6}
             )
 
         content_area.content = ft.Column([
@@ -144,11 +143,17 @@ def main(page: ft.Page):
     # --- PANEL LATERAL IZQUIERDO (INFORMACIÓN FIJA) ---
     sidebar = ft.Container(
         content=ft.Column([
+            # Imagen de perfil con recorte circular y ajuste seguro de "cover" mediante cadena de texto
             ft.Container(
-                content=ft.Text("BGS", size=26, weight=ft.FontWeight.BOLD, color=ft.Colors.WHITE),
+                content=ft.Image(
+                    src="bryann_perfil.png",
+                    fit="cover",  # <--- CORREGIDO: Uso de string nativo compatible
+                    border_radius=45
+                ),
                 alignment=ft.Alignment(0, 0),
-                width=85, height=85,
+                width=90, height=90,
                 shape=ft.BoxShape.CIRCLE,
+                padding=3,
                 gradient=ft.LinearGradient([COLOR_PRIMARIO, COLOR_ACCENTO])
             ),
             ft.Text("Bryann Gutierrez S.", size=20, weight=ft.FontWeight.BOLD, text_align=ft.TextAlign.CENTER),
@@ -157,7 +162,7 @@ def main(page: ft.Page):
             
             ft.Divider(color=ft.Colors.GREY_800, height=20),
             
-            # Datos de contacto
+            # Datos de contacto[cite: 1]
             ft.Row([ft.Icon(ft.Icons.PHONE, color=ft.Colors.GREY_500, size=16), ft.Text("+57 310 2159370", size=12)]),
             ft.Row([ft.Icon(ft.Icons.EMAIL, color=ft.Colors.GREY_500, size=16), ft.Text("brags@outlook.es", size=12)]),
             ft.Row([ft.Icon(ft.Icons.LOCATION_ON, color=ft.Colors.GREY_500, size=16), ft.Text("Tunja, Boyacá, Col", size=12)]),
@@ -171,7 +176,7 @@ def main(page: ft.Page):
             ft.TextButton("TECNOLOGÍAS", icon=ft.Icons.CODE, on_click=show_habilidades, style=ft.ButtonStyle(color=ft.Colors.WHITE)),
             
             ft.Divider(color=ft.Colors.GREY_800, height=20),
-            # Badge de Situación Legal / Militar
+            # Badge de Situación Legal / Militar[cite: 1]
             ft.Container(
                 content=ft.Column([
                     ft.Text("Legal & Ley", size=11, weight=ft.FontWeight.BOLD, color=COLOR_PRIMARIO),
